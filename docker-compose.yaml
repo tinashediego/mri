@@ -1,0 +1,15 @@
+version: '3'
+services:
+  tmbackend:
+    build: .
+    image: mrmi-backend:latest
+    ports:
+      - "8009:8009"
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8009 &&
+             gunicorn --bind=:8009 --workers=6 --threads=6 mrmiBackend.wsgi:application
+             "
+    volumes:
+      - ./:/app
