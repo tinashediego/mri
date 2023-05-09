@@ -81,19 +81,12 @@ WSGI_APPLICATION = 'mri.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'mri',
-
-        'USER': 'postgres',
-
-        'PASSWORD': 'admin',
-
-        'HOST': '127.0.0.1',
-
+        'NAME': os.getenv('DB_NAME', 'mri'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'admin'),
+        'HOST': os.getenv('DB_URL', 'localhost'),
         'PORT': '5432',
 
     }
